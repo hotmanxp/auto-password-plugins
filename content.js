@@ -14,6 +14,7 @@ const login = () => {
   alert(`username: ${username}, password: ${password}`)
   document.getElementById("sendBtn").dispatchEvent(e);
 }
+
 chrome.extension.onMessage.addListener((message) => {
   if(message === 'login') login()
 })
