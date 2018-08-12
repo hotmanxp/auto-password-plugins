@@ -1,16 +1,19 @@
-document.getElementById("username").value = 'liang'
+const getUserInfo = () => {
+  let storeUser = localStorage.getItem('znPassword')
+  return (
+    storeUser
+    ? storeUser.split('|')
+    : ['135000000', 'Znpassword']
+  )
+}
 
-// chrome.extension.onMessage((...arg) => {
-//   console.log(...arg)
-// })
-
-console.log(localStorage.getItem('znPassword'))
-
-const send = () => {
-  let e = document.createEvent("MouseEvents");
-    e.initEvent("click", true, true);
-    document.getElementById("sendBtn").dispatchEvent(e);
+const login = () => {
+  const [username, password] = getUserInfo()
+  const e = document.createEvent("MouseEvents");
+  e.initEvent("click", true, true);
+  alert(`username: ${username}, password: ${password}`)
+  document.getElementById("sendBtn").dispatchEvent(e);
 }
 chrome.extension.onMessage.addListener((message) => {
-  if(message === 'send') send()
+  if(message === 'login') login()
 })
